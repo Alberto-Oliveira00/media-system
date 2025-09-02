@@ -19,6 +19,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IMediaService, MediaService>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("ReactApp", p => p
+    .WithOrigins("http://localhost:5173", "http://localhost:3000")
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
 
 builder.Services.AddAutoMapper(cfg =>
 {
@@ -34,6 +41,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+app.UseCors("ReactApp");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
