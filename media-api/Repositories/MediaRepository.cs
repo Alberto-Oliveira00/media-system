@@ -33,7 +33,7 @@ public class MediaRepository : IMediaRepository
 
     public Task UpdateAsync(Media media)
     {
-        _context.Entry(media).State = EntityState.Modified;
+        _context.Medias.Update(media);
         return Task.CompletedTask;
     }
 

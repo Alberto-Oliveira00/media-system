@@ -7,6 +7,6 @@ public interface IMediaService
     Task<MediaResponseDTO> CreateMediaAsync(MediaRequestDTO mediaDto);
     Task<IEnumerable<MediaResponseDTO>> GetAllMediasAsync();
     Task<MediaResponseDTO> GetMediaByIdAsync(int id);
-    Task UpdateMediaAsync(int id, MediaRequestDTO mediaDto);
+    Task<MediaResponseDTO> UpdateMediaAsync(int id, MediaRequestDTO mediaDto);
     Task DeleteMediaAsync(int id);
 }

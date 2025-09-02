@@ -168,3 +168,7 @@ E:\projetos\media-system\media-api\obj\Debug\net8.0\refint\media-api.dll
 E:\projetos\media-system\media-api\obj\Debug\net8.0\media-api.pdb
 E:\projetos\media-system\media-api\obj\Debug\net8.0\media-api.genruntimeconfig.cache
 E:\projetos\media-system\media-api\obj\Debug\net8.0\ref\media-api.dll
+E:\projetos\media-system\media-api\bin\Debug\net8.0\AutoMapper.dll
+E:\projetos\media-system\media-api\obj\Debug\net8.0\media-api.sourcelink.json
+E:\projetos\media-system\media-api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+E:\projetos\media-system\media-api\bin\Debug\net8.0\media-api.staticwebassets.runtime.json

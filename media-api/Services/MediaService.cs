@@ -9,21 +9,30 @@ public class MediaService : IMediaService
 {
     private readonly IMediaRepository _repository;
     private readonly IMapper _mapper;
+    private readonly IWebHostEnvironment _env;
 
-    public MediaService(IMapper mapper, IMediaRepository repository)
+    public MediaService(IMapper mapper, IMediaRepository repository, IWebHostEnvironment env)
     {
         _mapper = mapper;
         _repository = repository;
+        _env = env;
     }
     public async Task<MediaResponseDTO> CreateMediaAsync(MediaRequestDTO mediaDto)
     {
-        if (string.IsNullOrWhiteSpace(mediaDto.Nome))
-            throw new ArgumentException("O nome da mídia é obrigatório.");
+        var uploadsPath = Path.Combine(_env.WebRootPath, "uploads");
+        if (!Directory.Exists(uploadsPath))
+            Directory.CreateDirectory(uploadsPath);
 
-        if (string.IsNullOrWhiteSpace(mediaDto.FilePath))
-            throw new ArgumentException("A mídia é obrigatório.");
+        var fileName = DateTime.Now.ToString("ddMMyyyyhhss") + "_" + mediaDto.Nome + Path.GetExtension(mediaDto.File.FileName);
+        var filePath = Path.Combine(uploadsPath, fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await mediaDto.File.CopyToAsync(stream);
+        }
 
         var media = _mapper.Map<Media>(mediaDto);
+        media.FilePath = $"/uploads/{fileName}";
 
         await _repository.AddAsync(media);
         await _repository.CommitAsync();
@@ -47,21 +56,40 @@ public class MediaService : IMediaService
         return _mapper.Map<MediaResponseDTO>(media);
     }
 
-    public async Task UpdateMediaAsync(int id, MediaRequestDTO mediaDto)
+    public async Task<MediaResponseDTO> UpdateMediaAsync(int id, MediaRequestDTO mediaDto)
     {
-        if (id <= 0)
-            throw new ArgumentException("Id da mídia inválida.");
-
         var media = await _repository.GetByIdAsync(id);
 
         if (media is null)
-            throw new KeyNotFoundException("Id não encontrado");
+            throw new KeyNotFoundException("Mídia não encontrada.");
 
         _mapper.Map(mediaDto, media);
+
+        if(mediaDto.File != null && mediaDto.File.Length > 0)
+        {
+            var antigoFile = Path.Combine(_env.WebRootPath, media.FilePath.TrimStart('/'));
+            if (File.Exists(antigoFile))
+                File.Delete(antigoFile);
+
+            var uploadPath = Path.Combine(_env.WebRootPath, "uploads");
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            var fileName = DateTime.Now.ToString("ddMMyyyyhhss") + "_" + mediaDto.Nome + Path.GetExtension(mediaDto.File.FileName);
+            var newFilePath = Path.Combine(uploadPath, fileName);
+
+            using(var stream = new FileStream(newFilePath, FileMode.Create))
+            {
+                await mediaDto.File.CopyToAsync(stream);
+            }
+
+            media.FilePath = $"/uploads/{fileName}";
+        }
 
         await _repository.UpdateAsync(media);
 
         await _repository.CommitAsync();
+        return _mapper.Map<MediaResponseDTO>(media);
     }
 
     public async Task DeleteMediaAsync(int id)
