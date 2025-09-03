@@ -3,13 +3,12 @@ import PageHeader from './components/PageHeader';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Medias from './pages/Medias';
 
-
 function App() {
   
   const { Content } = Layout;
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh"}}>
       <PageHeader />
       <Content style={{ padding: "24px"}}>
         <Routes>

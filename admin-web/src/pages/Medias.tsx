@@ -11,24 +11,25 @@ export default function Medias(){
     const [editing, setEditing] = useState<Media | null>(null);
 
     useEffect(() => {
-        fetchMedias().catch(() => message.error("Erro ao carregar mídias"));
-    }, []);
+        fetchMedias();
+    }, [fetchMedias]);
 
     const handleCreateOrUpdate = async (fd: FormData, editingId?: number) => {
-        if(editingId){
-            await updateMedia(editingId, fd);
+        let success = false;
+        if (editingId) {
+            success = await updateMedia(editingId, fd);
         } else {
-            await addMedia(fd);
+            success = await addMedia(fd);
+        }
+
+        if (success) {
+            setOpen(false);
         }
     };
 
     const handleDelete = async (id: number) => {
-        const ok = await deleteMedia(id);
-        if(!ok)
-            message.error("Erro ao deletar")
-        else 
-            message.success("Mídia deletada");
-    }
+        await deleteMedia(id);
+    };
 
     if (loading) return <Spin />
 
@@ -36,12 +37,16 @@ export default function Medias(){
         <div>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
                 <h2>Mídias</h2>
-                <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>Nova midia</Button>
+                <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>Adicionar midia</Button>
             </div>
 
-            <MediaTable data={medias} onEdit={(m) => { setEditing(m); setOpen(true); }} onReload={() => fetchMedias()} onDelete={handleDelete} />
+            <MediaTable 
+                data={medias} 
+                onEdit={(m) => { setEditing(m); setOpen(true); }}
+                onDelete={handleDelete} 
+            />
 
             <MediaForm open={open} editing={editing} onClose={() => setOpen(false)} onSubmit={handleCreateOrUpdate} />
         </div>
-    )
+    );
 }

@@ -35,45 +35,46 @@ export default function MediaForm({ open, editing, onClose, onSubmit }: Props) {
     try {
       const values = await form.validateFields();
       if (!editing && !file) {
-        message.error("Selecione um arquivo para cadastrar.");
+        alert("Selecione um arquivo para cadastrar.");
         return;
       }
 
       const fd = new FormData();
       fd.append("Nome", values.Nome);
-      if (values.Descricao) fd.append("Descricao", values.Descricao);
-      if (file?.originFileObj) {
+
+      if (values.Descricao) 
+        fd.append("Descricao", values.Descricao);
+
+      if (file?.originFileObj) 
         fd.append("File", file.originFileObj);
-    }
 
       setSubmitting(true);
       await onSubmit(fd, editing?.id);
-      message.success(editing ? "Atualizado com sucesso" : "Criado com sucesso");
       onClose();
     } catch (err: any) {
       console.error(err);
-      message.error(err?.message ?? "Erro ao salvar");
+      message.error(`Erro ao salvar: ${err?.message}`);
     } finally {
       setSubmitting(false);
     }
   };
 
   const uploadProps = {
-  beforeUpload: (f: File) => {
-    const newFile: UploadFile = {
-      uid: `${Date.now()}`,
-      name: f.name,
-      status: "done",
-      originFileObj: f as RcFile,
-    };
-    setFile(newFile);
-    return false;
+    beforeUpload: (f: File) => {
+      const newFile: UploadFile = {
+        uid: `${Date.now()}`,
+        name: f.name,
+        status: "done",
+        originFileObj: f as RcFile,
+      };
+      setFile(newFile);
+      return false;
     },
     fileList: file ? [file] : [],
     onRemove: () => {
-    setFile(null);
+      setFile(null);
     },
-};  
+  };  
   
 
   const content = (

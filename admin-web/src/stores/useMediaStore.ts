@@ -1,14 +1,16 @@
 import { create } from "zustand";
 import type { Media } from "../types/media";
 import * as mediaService from "../api/mediaService";
+import { message } from "antd";
+import { AxiosError } from "axios";
 
 type State = {
     medias: Media[];
     loading: boolean;
     error?: string | null;
     fetchMedias: () => Promise<void>;
-    addMedia: (fd: FormData) => Promise<Media| null>;
-    updateMedia: (id: number, fd: FormData) => Promise<Media | null>;
+    addMedia: (fd: FormData) => Promise<boolean>;
+    updateMedia: (id: number, fd: FormData) => Promise<boolean>;
     deleteMedia: (id: number) => Promise<boolean>;
 };
 
@@ -24,6 +26,7 @@ export const useMediaStore = create<State>((set, get) => ({
             set({ medias: list});
         } catch (err: any){
             set({ error: err?.message ?? "Erro ao carregar mídias" });
+            message.error("Erro ao carregar mídias");
         } finally {
           set({ loading: false });
         }
@@ -32,11 +35,13 @@ export const useMediaStore = create<State>((set, get) => ({
     addMedia: async (fd) => {
         try{
             const created = await mediaService.createMedia(fd);
-            set((s) => ({ medias: [created, ...s.medias]}))
-            return created;
+            set((s) => ({ medias: [created, ...s.medias] }));
+            message.success("Mídia criada com sucesso");
+            return true;
         } catch (error) {
-            console.log(error);
-            return null;
+            const err = error as AxiosError;
+            message.error(`Erro ao criar mídia: ${err.response?.data}`);
+            return false;
         }
     },
 
@@ -44,22 +49,26 @@ export const useMediaStore = create<State>((set, get) => ({
         try {
             const updated = await mediaService.updateMedia(id, fd);
             set((s) => ({ medias: s.medias.map(m => m.id === id ? updated : m) }));
-            return updated;
+            message.success("Mídia atualizada com sucesso!");
+            return true;
         } catch (error) {
-            console.error(error);
-            return null;
+            const err = error as AxiosError;
+            message.error(`Erro ao atualizar mídia: ${err.response?.data}`);
+            return false;
         }
     },
 
     deleteMedia: async (id) => {
-    try {
-      await mediaService.deleteMedia(id);
-      set((s) => ({ medias: s.medias.filter(m => m.id !== id) }));
-      return true;
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
-  },
-}))
+        try {
+            await mediaService.deleteMedia(id);
+            set((s) => ({ medias: s.medias.filter(m => m.id !== id) }));
+            message.success("Mídia deletada com sucesso!");
+            return true;
+        } catch (err) {
+            const error = err as AxiosError;
+            message.error(`Erro ao deletar mídia: ${error.response?.data}`);
+            return false;
+        }
+    },
+}));
 
