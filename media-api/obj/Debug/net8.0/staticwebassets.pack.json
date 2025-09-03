@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250932_6.docx",
+      "PackagePath": "staticwebassets\\uploads\\020920250932_6.docx"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250953_Drake.jpg",
+      "PackagePath": "staticwebassets\\uploads\\020920250953_Drake.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250959_Organo.mp4",
+      "PackagePath": "staticwebassets\\uploads\\020920250959_Organo.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920251035_thiaguinho.jpg",
+      "PackagePath": "staticwebassets\\uploads\\020920251035_thiaguinho.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\06eb3c76-0acf-4c20-84c2-50497319a3b7.jpg",
+      "PackagePath": "staticwebassets\\uploads\\06eb3c76-0acf-4c20-84c2-50497319a3b7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\9a800016-da1f-4499-9921-e4ac82179a4d.jpg",
+      "PackagePath": "staticwebassets\\uploads\\9a800016-da1f-4499-9921-e4ac82179a4d.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.media-api.props",
+      "PackagePath": "build\\media-api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.media-api.props",
+      "PackagePath": "buildMultiTargeting\\media-api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.media-api.props",
+      "PackagePath": "buildTransitive\\media-api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.media-api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
