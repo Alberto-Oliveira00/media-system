@@ -11,7 +11,9 @@ public class Playlist
     [StringLength(255)]
     public string Nome { get; set; } = string.Empty;
 
+    [StringLength(1000)]
+    public string Descricao { get; set; } = string.Empty;
     public bool IsActiveForPlayer { get; set; } = false;
-
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     public ICollection<PlaylistMedia> PlaylistMedias { get; set; } = new List<PlaylistMedia>();
 }

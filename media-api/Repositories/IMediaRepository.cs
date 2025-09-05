@@ -10,5 +10,4 @@ public interface IMediaRepository
     Task AddAsync(Media media);
     Task UpdateAsync(Media media);
     Task DeleteAsync(int id);
-    Task CommitAsync();
 }

@@ -18,6 +18,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IMediaService, MediaService>();
 builder.Services.AddScoped<IMediaRepository, MediaRepository>();
+builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+builder.Services.AddScoped<IPlaylistService, PlaylistService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddCors(options =>
 {
@@ -30,6 +33,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile(new MediaDTOMappingProfile());
+    cfg.AddProfile(new PlaylistDTOMappingProfile());
 });
 
 var app = builder.Build();

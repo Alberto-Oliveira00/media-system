@@ -6,5 +6,5 @@ public class PlaylistMedia
     public Playlist Playlist { get; set; }
 
     public int MediaId { get; set; }
-    public Media Media { get; set; }
+    public Media Media { get; set; }  
 }

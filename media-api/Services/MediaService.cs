@@ -7,15 +7,15 @@ namespace media_api.Services;
 
 public class MediaService : IMediaService
 {
-    private readonly IMediaRepository _repository;
     private readonly IMapper _mapper;
     private readonly IWebHostEnvironment _env;
+    private readonly IUnitOfWork _uof;
 
-    public MediaService(IMapper mapper, IMediaRepository repository, IWebHostEnvironment env)
+    public MediaService(IMapper mapper, IWebHostEnvironment env, IUnitOfWork uof)
     {
         _mapper = mapper;
-        _repository = repository;
         _env = env;
+        _uof = uof;
     }
     public async Task<MediaResponseDTO> CreateMediaAsync(MediaRequestDTO mediaDto)
     {
@@ -34,22 +34,22 @@ public class MediaService : IMediaService
         var media = _mapper.Map<Media>(mediaDto);
         media.FilePath = $"/uploads/{fileName}";
 
-        await _repository.AddAsync(media);
-        await _repository.CommitAsync();
+        await _uof.MediaRepository.AddAsync(media);
+        await _uof.CommitAsync();
 
         return _mapper.Map<MediaResponseDTO>(media);
     }
 
     public async Task<IEnumerable<MediaResponseDTO>> GetAllMediasAsync()
     {
-        var medias = await _repository.GetAllAsync();
+        var medias = await _uof.MediaRepository.GetAllAsync();
 
         return _mapper.Map<IEnumerable<MediaResponseDTO>>(medias);
     }
 
     public async Task<MediaResponseDTO> GetMediaByIdAsync(int id)
     {
-        var media = await _repository.GetByIdAsync(id);
+        var media = await _uof.MediaRepository.GetByIdAsync(id);
         if (media is null)
             throw new KeyNotFoundException("Mídia não encontrada.");
 
@@ -58,7 +58,7 @@ public class MediaService : IMediaService
 
     public async Task<MediaResponseDTO> UpdateMediaAsync(int id, MediaRequestDTO mediaDto)
     {
-        var media = await _repository.GetByIdAsync(id);
+        var media = await _uof.MediaRepository.GetByIdAsync(id);
 
         if (media is null)
             throw new KeyNotFoundException("Mídia não encontrada.");
@@ -86,20 +86,20 @@ public class MediaService : IMediaService
             media.FilePath = $"/uploads/{fileName}";
         }
 
-        await _repository.UpdateAsync(media);
+        await _uof.MediaRepository.UpdateAsync(media);
 
-        await _repository.CommitAsync();
+        await _uof.CommitAsync();
         return _mapper.Map<MediaResponseDTO>(media);
     }
 
     public async Task DeleteMediaAsync(int id)
     {
-        var mediaDelete = await _repository.GetByIdAsync(id);
+        var mediaDelete = await _uof.MediaRepository.GetByIdAsync(id);
 
         if (mediaDelete is null)
             throw new KeyNotFoundException("Id não encontrado");
 
-        await _repository.DeleteAsync(id);
-        await _repository.CommitAsync();
+        await _uof.MediaRepository.DeleteAsync(id);
+        await _uof.CommitAsync();
     }
 }

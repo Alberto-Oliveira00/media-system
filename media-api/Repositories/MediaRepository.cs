@@ -31,10 +31,9 @@ public class MediaRepository : IMediaRepository
         return await _context.Medias.FindAsync(id);
     }
 
-    public Task UpdateAsync(Media media)
+    public async Task UpdateAsync(Media media)
     {
         _context.Medias.Update(media);
-        return Task.CompletedTask;
     }
 
     public async Task DeleteAsync(int id)
@@ -44,10 +43,5 @@ public class MediaRepository : IMediaRepository
         {
             _context.Medias.Remove(media);
         }
-    }
-
-    public async Task CommitAsync()
-    {
-        await _context.SaveChangesAsync();
     }
 }

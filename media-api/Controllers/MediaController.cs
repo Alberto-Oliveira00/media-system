@@ -19,12 +19,20 @@ public class MediaController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetAsync()
     {
-        var medias = await _service.GetAllMediasAsync();
+        try
+        {
+            var medias = await _service.GetAllMediasAsync();
 
-        if(medias == null)
-            return NoContent();
+            if (medias == null)
+                return NoContent();
 
-        return Ok(medias);
+            return Ok(medias);
+        }
+        catch (Exception)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro ao buscar a mídia.");
+        }
+        
     }
 
     [HttpGet("{id:int}", Name = "GetMediaById")]
