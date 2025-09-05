@@ -25,9 +25,9 @@ public class PlaylistsController : ControllerBase
                 return NoContent();
             return Ok(playlists);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro ao buscar mídias");
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
 

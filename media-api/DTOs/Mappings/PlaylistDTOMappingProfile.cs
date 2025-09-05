@@ -9,6 +9,6 @@ public class PlaylistDTOMappingProfile : Profile
     {
         CreateMap<PlaylistRequestDTO, Playlist>();
 
-        CreateMap<PlaylistResponseDTO, Playlist>();
+        CreateMap<Playlist, PlaylistResponseDTO>();
     }
 }
