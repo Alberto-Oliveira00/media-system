@@ -6,11 +6,11 @@ namespace media_api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class PlaylistsController : ControllerBase
+public class PlaylistController : ControllerBase
 {
     IPlaylistService _service;
 
-    public PlaylistsController(IPlaylistService service)
+    public PlaylistController(IPlaylistService service)
     {
         _service = service;
     }
