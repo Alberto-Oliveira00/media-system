@@ -6,7 +6,7 @@ public interface IPlaylistRepository
 {
     Task<IEnumerable<Playlist>> GetAllAsync();
     Task<Playlist> GetByIdAsync(int id);
-    Task <Playlist> AddAsync(Playlist playlist);
+    Task<Playlist> AddAsync(Playlist playlist);
     Task UpdateAsync(Playlist playlist);
     Task DeleteAsync(int id);
     Task AddMediaToPlaylistAsync(int playlistId, int mediaId);

@@ -31,6 +31,12 @@ export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
             return;
         setLoadingAction(true);
         const sucess = await addMediaToPlaylist(playlist.id, mediaId);
+        if (sucess) {
+            const updated = usePlaylistStore.getState().playlists.find(p => p.id === playlist.id);
+            if (updated) {
+            Object.assign(playlist, updated);
+            }
+        }
         setLoadingAction(false);
     };
 
@@ -39,6 +45,12 @@ export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
             return;
         setLoadingAction(true);
         const sucess = await deleteMediaFromPlaylist(playlist.id, mediaId);
+        if(sucess) {
+            const update = usePlaylistStore.getState().playlists.find(p => p.id === playlist.id);
+            if(update) {
+                Object.assign(playlist, update);
+            }
+        }
         setLoadingAction(false);
     };
 

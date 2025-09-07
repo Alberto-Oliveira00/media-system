@@ -30,3 +30,19 @@ a {
   }
 }
 
+.custom-menu .ant-menu-item:hover {
+  background-color: transparent !important;
+}
+
+.custom-menu .ant-menu-item-selected {
+  background-color: transparent !important;
+}
+
+.custom-menu .ant-menu-item::after {
+  display: none !important;
+}
+
+.ant-drawer .ant-menu-item {
+  display: block !important;
+}
+

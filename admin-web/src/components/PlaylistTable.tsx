@@ -26,11 +26,6 @@ export default function PlaylistTable({ data, onEdit, onDelete, onOpenMedias }: 
                 </Button>
             )
         },
-        { 
-            title: "Player Ativo", 
-            key: "isActiveForPlayer",
-            render: (_: any, r: Playlist) => (r.isActivePlayer ? "Sim" : "Não")
-        },
         {
             title: "Ações",
             key: "acoes",

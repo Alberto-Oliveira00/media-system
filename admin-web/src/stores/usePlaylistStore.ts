@@ -16,7 +16,7 @@ type State = {
     deleteMediaFromPlaylist: (playlistId: number, mediaId: number) => Promise<boolean>;
 }
 
-export const usePlaylistStore = create<State>((set) =>({
+export const usePlaylistStore = create<State>((set, get) =>({
     playlists: [],
     loading: false,
     error: null,
@@ -89,9 +89,9 @@ export const usePlaylistStore = create<State>((set) =>({
         set({ loading: true });
         try {
             await playlistService.addMediaToPlaylist(playlistId, mediaId);
-            const updatePlaylist = await playlistService.getPlaylistById(playlistId);
+            const update = await playlistService.getPlaylistById(playlistId);
             set((s) => ({
-                playlists: s.playlists.map(p => p.id === playlistId ? updatePlaylist : p)
+                playlists: s.playlists.map(p => p.id === playlistId ? update : p)
             }));
             message.success("Mídia adicionada a playlist!");
             return true;
@@ -107,10 +107,10 @@ export const usePlaylistStore = create<State>((set) =>({
     deleteMediaFromPlaylist: async (playlistId, mediaId) => {
         set({ loading: true });
         try {
-            await playlistService.addMediaToPlaylist(playlistId, mediaId);
-            const updatePlaylist = await playlistService.getPlaylistById(playlistId);
+            await playlistService.removeMediaFromPlaylist(playlistId, mediaId);
+            const update = await playlistService.getPlaylistById(playlistId);
             set((s) => ({
-                playlists: s.playlists.map(p => p.id === playlistId ? updatePlaylist : p)
+                playlists: s.playlists.map(p => p.id === playlistId ? update : p)
             }));
             message.success("Mídia removida da playlist!");
             return true;
