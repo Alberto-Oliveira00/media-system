@@ -11,5 +11,4 @@ public class PlaylistRequestDTO
     public string? Descricao { get; set; }
     public bool IsActiveForPlayer { get; set; } = false;
 
-    public ICollection<PlaylistMedia> PlaylistMedias { get; set; } = new List<PlaylistMedia>();
 }

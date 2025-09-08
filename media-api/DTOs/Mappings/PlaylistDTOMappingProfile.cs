@@ -9,6 +9,7 @@ public class PlaylistDTOMappingProfile : Profile
     {
         CreateMap<PlaylistRequestDTO, Playlist>();
 
-        CreateMap<Playlist, PlaylistResponseDTO>();
+        CreateMap<Playlist, PlaylistResponseDTO>()
+            .ForMember(dest => dest.Medias, opt => opt.MapFrom(src => src.PlaylistMedias.Select(pm => pm.Media)));
     }
 }

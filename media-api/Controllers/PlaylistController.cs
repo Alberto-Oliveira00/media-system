@@ -49,6 +49,28 @@ public class PlaylistController : ControllerBase
         }
     }
 
+    [HttpGet("{id:int}/medias")]
+    public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetMediasByPlaylistIdAsync(int id)
+    {
+        try
+        {
+            var medias = await _service.GetMediasByPlaylistIdAsync(id);
+            if (medias == null || !medias.Any())
+            {
+                return NoContent();
+            }
+            return Ok(medias);
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<PlaylistResponseDTO>> PostAsync(PlaylistRequestDTO playlistDto)
     {
@@ -103,7 +125,7 @@ public class PlaylistController : ControllerBase
         }
     }
 
-    [HttpPost("{playlistId:int}/media{mediaId:int}")]
+    [HttpPost("{playlistId:int}/medias/{mediaId:int}")]
     public async Task<IActionResult> PostMediaToPlaylistAsync(int playlistId, int mediaId)
     {
         try
@@ -121,12 +143,12 @@ public class PlaylistController : ControllerBase
         }
     }
 
-    [HttpDelete("{playlistId:int}/media{mediaId:int}")]
+    [HttpDelete("{playlistId:int}/medias/{mediaId:int}")]
     public async Task<IActionResult> DeleteMediaToPlaylist(int playlistId, int mediaId)
     {
         try
         {
-            await _service.RemoveMediaFromPlaylistAsync(playlistId, mediaId);
+            await _service.DeleteMediaFromPlaylistAsync(playlistId, mediaId);
             return NoContent();
         }
         catch (KeyNotFoundException ex)

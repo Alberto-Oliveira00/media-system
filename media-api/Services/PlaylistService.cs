@@ -30,6 +30,12 @@ public class PlaylistService : IPlaylistService
         return _mapper.Map<PlaylistResponseDTO>(playlist);
     }
 
+    public async Task<IEnumerable<MediaResponseDTO>> GetMediasByPlaylistIdAsync(int playlistId)
+    {
+        var medias = await _uof.PlaylistRepository.GetMediasByPlaylistIdAsync(playlistId);
+        return _mapper.Map<IEnumerable<MediaResponseDTO>>(medias);
+    }
+
     public async Task<PlaylistResponseDTO> CreatePlaylistAsync(PlaylistRequestDTO playlistDTO)
     {
         var playlist = _mapper.Map<Playlist>(playlistDTO);
@@ -72,7 +78,7 @@ public class PlaylistService : IPlaylistService
         await _uof.PlaylistRepository.AddMediaToPlaylistAsync(playlistId, mediaId);
         await _uof.CommitAsync();
     }
-    public async Task RemoveMediaFromPlaylistAsync(int playlistId, int mediaId)
+    public async Task DeleteMediaFromPlaylistAsync(int playlistId, int mediaId)
     {
         var playlist = await _uof.PlaylistRepository.GetByIdAsync(playlistId);
         if (playlist is null)
@@ -82,7 +88,7 @@ public class PlaylistService : IPlaylistService
         if (media is null)
             throw new KeyNotFoundException("Mídia não encontrada");
 
-        await _uof.PlaylistRepository.DeleteMediaToPlaylistAsync(mediaId, playlistId);
+        await _uof.PlaylistRepository.DeleteMediaToPlaylistAsync(playlistId, mediaId);
         await _uof.CommitAsync();
     }
 

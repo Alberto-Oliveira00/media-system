@@ -93,6 +93,34 @@
       "PackagePath": "staticwebassets\\uploads\\050920250759_12.jpg"
     },
     {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250222_Teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\070920250222_Teste.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250241_Teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\070920250241_Teste.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250257_Novo teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\070920250257_Novo teste.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250315_ Media Teste.png",
+      "PackagePath": "staticwebassets\\uploads\\070920250315_ Media Teste.png"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250330_ahvsahf.png",
+      "PackagePath": "staticwebassets\\uploads\\070920250330_ahvsahf.png"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250421_teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\070920250421_teste.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250531_Bebetp.jpg",
+      "PackagePath": "staticwebassets\\uploads\\070920250531_Bebetp.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.media-api.props",
       "PackagePath": "build\\media-api.props"
     },

@@ -8,6 +8,6 @@ public class PlaylistResponseDTO
     public string Nome { get; set; } = string.Empty;
     public string Descricao { get; set; } = string.Empty;
     public bool IsActiveForPlayer { get; set; }
-    public DateTime Date { get; set; }
-    public ICollection<Media> Medias { get; set; } = new List<Media>();
+    public DateTime CreatedAt { get; set; }
+    public ICollection<MediaResponseDTO> Medias { get; set; } = new List<MediaResponseDTO>();
 }

@@ -26,6 +26,15 @@ public class PlaylistRepository : IPlaylistRepository
         .FirstOrDefaultAsync(p => p.Id == id);
     }
 
+    public async Task<IEnumerable<Media>> GetMediasByPlaylistIdAsync(int playlistId)
+    {
+        var medias = await _context.PlaylistMedias
+                    .Where(p => p.PlaylistId == playlistId)
+                    .Select(pm => pm.Media)
+                    .ToListAsync();
+        return medias;
+    }
+
     public async Task<Playlist> AddAsync(Playlist playlist)
     {
         await _context.Playlists.AddAsync(playlist);
