@@ -6,6 +6,7 @@ public interface IPlaylistService
 {
     Task<PlaylistResponseDTO> CreatePlaylistAsync(PlaylistRequestDTO playlistDTO);
     Task<IEnumerable<PlaylistResponseDTO>> GetAllPlaylistAsync();
+    Task<IEnumerable<PlaylistResponseDTO>> GetPlaylistIsActiveAsync();
     Task<PlaylistResponseDTO> GetPlaylistByIdAsync(int id);
     Task<IEnumerable<MediaResponseDTO>> GetMediasByPlaylistIdAsync(int playlistId);
     Task UpdatePlaylistAsync(int id, PlaylistRequestDTO playlistDto);

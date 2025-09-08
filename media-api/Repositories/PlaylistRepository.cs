@@ -35,6 +35,14 @@ public class PlaylistRepository : IPlaylistRepository
         return medias;
     }
 
+    public async Task<IEnumerable<Playlist>> GetPlaylistsIsActiveAsync()
+    {
+        return await _context.Playlists.Where(p => p.IsActiveForPlayer)
+                    .Include(p => p.PlaylistMedias)
+                    .ThenInclude(pm => pm.Media)
+                    .ToListAsync();
+    }
+
     public async Task<Playlist> AddAsync(Playlist playlist)
     {
         await _context.Playlists.AddAsync(playlist);

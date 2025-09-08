@@ -13,7 +13,7 @@ public class Playlist
 
     [StringLength(1000)]
     public string Descricao { get; set; } = string.Empty;
-    public bool IsActiveForPlayer { get; set; } = false;
+    public bool IsActiveForPlayer { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public ICollection<PlaylistMedia> PlaylistMedias { get; set; } = new List<PlaylistMedia>();
 }

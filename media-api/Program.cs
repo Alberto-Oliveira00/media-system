@@ -26,9 +26,11 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp", p => p
-    .WithOrigins("http://localhost:5173", "http://localhost:3000")
+        .WithOrigins("http://localhost:5173", "http://localhost:5174")
         .AllowAnyHeader()
-        .AllowAnyMethod());
+        .AllowAnyMethod()
+        .AllowCredentials()
+    );
 });
 
 builder.Services.AddAutoMapper(cfg =>
@@ -45,11 +47,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseRouting();
 app.UseCors("ReactApp");
 
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

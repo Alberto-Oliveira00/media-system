@@ -71,6 +71,26 @@ public class PlaylistController : ControllerBase
         }
     }
 
+    [HttpGet("active")]
+    public async Task<ActionResult<IEnumerable<PlaylistResponseDTO>>> GetActivePlaylistsAsync()
+    {
+        try
+        {
+            var activePlaylists = await _service.GetPlaylistIsActiveAsync();
+
+            if (activePlaylists == null)
+            {
+                return NotFound("Nenhuma playlist ativa encontrada.");
+            }
+            
+            return Ok(activePlaylists);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<ActionResult<PlaylistResponseDTO>> PostAsync(PlaylistRequestDTO playlistDto)
     {

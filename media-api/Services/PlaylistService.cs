@@ -2,6 +2,7 @@ using AutoMapper;
 using media_api.DTOs;
 using media_api.Models;
 using media_api.Repositories;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace media_api.Services;
 
@@ -20,6 +21,17 @@ public class PlaylistService : IPlaylistService
         var playlists = await _uof.PlaylistRepository.GetAllAsync();
         return _mapper.Map<IEnumerable<PlaylistResponseDTO>>(playlists);
     }
+
+    public async Task<IEnumerable<PlaylistResponseDTO>> GetPlaylistIsActiveAsync()
+    {
+        var playlistsActive = await _uof.PlaylistRepository.GetPlaylistsIsActiveAsync();
+        
+        if (playlistsActive == null)
+            return null;
+
+        return _mapper.Map<IEnumerable<PlaylistResponseDTO>>(playlistsActive);
+    }
+
     public async Task<PlaylistResponseDTO> GetPlaylistByIdAsync(int id)
     {
         var playlist = await _uof.PlaylistRepository.GetByIdAsync(id);
