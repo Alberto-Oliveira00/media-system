@@ -1,4 +1,3 @@
-// src/components/PlaylistCard.tsx
 import { Card } from "antd";
 import type { Playlist } from "../types/playlist";
 

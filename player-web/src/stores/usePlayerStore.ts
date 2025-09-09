@@ -1,4 +1,3 @@
-// src/store/usePlayerStore.ts
 import { create } from "zustand";
 import type { Playlist } from "../types/playlist";
 import * as playerService from "../api/playerService";
@@ -61,7 +60,8 @@ export const usePlayerStore = create<State>((set, get) => ({
   next: () => {
     const { playlists, selectedPlaylistId, currentIndex } = get();
     const pl = playlists.find((p) => p.id === selectedPlaylistId);
-    if (!pl || !pl.medias || pl.medias.length === 0) return;
+    if (!pl || !pl.medias || pl.medias.length === 0) 
+      return;
     const nextIndex = (currentIndex + 1) % pl.medias.length;
     set({ currentIndex: nextIndex });
   },
@@ -69,7 +69,8 @@ export const usePlayerStore = create<State>((set, get) => ({
   prev: () => {
     const { playlists, selectedPlaylistId, currentIndex } = get();
     const pl = playlists.find((p) => p.id === selectedPlaylistId);
-    if (!pl || !pl.medias || pl.medias.length === 0) return;
+    if (!pl || !pl.medias || pl.medias.length === 0) 
+      return;
     const prevIndex = (currentIndex - 1 + pl.medias.length) % pl.medias.length;
     set({ currentIndex: prevIndex });
   },

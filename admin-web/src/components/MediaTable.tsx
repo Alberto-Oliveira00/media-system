@@ -17,16 +17,8 @@ export default function MediaTable({ data, onEdit, onDelete }: Props) {
     
     return (
         <Table rowKey="id" dataSource={data} pagination={{ pageSize:8 }}>
-            {/* <Table.Column<Media> title="ID" dataIndex="id" /> */}
             <Table.Column<Media> title="Nome" dataIndex="nome" />
             <Table.Column<Media> title="Descrição" dataIndex="descricao" />
-            <Table.Column<Media> title="Arquivo"
-            render={(_, r) => (
-                <a href={`import.meta.env.VITE_API_BASE_URL?.replace("/api","") ?? ""}${r.filePath}`} target="_blank" rel="noreferrer">
-                    abrir
-                </a>
-            )} 
-            />
             <Table.Column<Media>
                 title="Ações"
                 render={(_, r) => (

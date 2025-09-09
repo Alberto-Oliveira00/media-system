@@ -1,4 +1,3 @@
-// src/components/PlayerView.tsx
 import { useEffect, useRef, useState } from "react";
 import { Button, Row, Col, Space, Progress, Typography, Tooltip, Empty } from "antd";
 import { PlayCircleOutlined, PauseOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
@@ -14,17 +13,11 @@ type Props = { playlist: Playlist };
 
 export default function PlayerView({ playlist }: Props) {
   const { currentIndex, playing, imageDuration, next, prev, play, pause, setIndex } = usePlayerStore();
-  if (!playlist || !playlist.medias || playlist.medias.length === 0) {
-    return <Empty description="Nenhuma mídia nessa playlist." />;
-  }
 
   const media = playlist.medias[currentIndex];
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const imageTimerRef = useRef<number | null>(null);
   const [progress, setProgress] = useState(0);
-  const [localPlaying, setLocalPlaying] = useState(playing);
-
-  useEffect(() => setLocalPlaying(playing), [playing]);
 
   useEffect(() => {
     return () => {
@@ -43,7 +36,7 @@ export default function PlayerView({ playlist }: Props) {
 
     const isImage = media.filePath?.match(/\.(jpg|jpeg|png|gif|webp)$/i);
     if (isImage) {
-      if (localPlaying) {
+      if (playing) {
         const start = performance.now();
         const tick = () => {
           const elapsed = (performance.now() - start) / 1000;
@@ -58,11 +51,11 @@ export default function PlayerView({ playlist }: Props) {
       }
     } else {
       if (videoRef.current) {
-        if (localPlaying) videoRef.current.play().catch(() => {});
+        if (playing) videoRef.current.play().catch(() => {});
         else videoRef.current.pause();
       }
     }
-  }, [media, localPlaying, imageDuration]);
+  }, [media, playing, imageDuration]);
 
   const onVideoTimeUpdate = () => {
     if (!videoRef.current) return;
@@ -73,7 +66,7 @@ export default function PlayerView({ playlist }: Props) {
   const onVideoEnded = () => next();
 
   const togglePlay = () => {
-    if (localPlaying) pause();
+    if (playing) pause();
     else play();
   };
 
@@ -92,7 +85,7 @@ export default function PlayerView({ playlist }: Props) {
                 onTimeUpdate={onVideoTimeUpdate}
                 onEnded={onVideoEnded}
                 style={{ width: "100%", maxHeight: "70vh", background: "#000" }}
-                autoPlay={localPlaying}
+                autoPlay={playing}
               />
             )}
           </div>
@@ -104,7 +97,7 @@ export default function PlayerView({ playlist }: Props) {
                   <Button icon={<LeftOutlined />} onClick={() => { prev(); setIndex(Math.max(0, currentIndex - 1)); }} />
                 </Tooltip>
 
-                <Button type="primary" shape="circle" icon={localPlaying ? <PauseOutlined /> : <PlayCircleOutlined />} onClick={togglePlay} />
+                <Button type="primary" shape="circle" icon={playing ? <PauseOutlined /> : <PlayCircleOutlined />} onClick={togglePlay} />
 
                 <Tooltip title="Próxima">
                   <Button icon={<RightOutlined />} onClick={() => { next(); setIndex((currentIndex + 1)); }} />

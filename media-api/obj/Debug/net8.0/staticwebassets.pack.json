@@ -57,10 +57,6 @@
       "PackagePath": "staticwebassets\\uploads\\030920251130_Alberto.jpg"
     },
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251130_justin .jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251130_justin .jpg"
-    },
-    {
       "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251209_string.jpg",
       "PackagePath": "staticwebassets\\uploads\\030920251209_string.jpg"
     },
@@ -83,10 +79,6 @@
     {
       "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251257_string.jpg",
       "PackagePath": "staticwebassets\\uploads\\030920251257_string.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\050920250705_12.jpg",
-      "PackagePath": "staticwebassets\\uploads\\050920250705_12.jpg"
     },
     {
       "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\050920250759_12.jpg",
@@ -119,6 +111,46 @@
     {
       "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250531_Bebetp.jpg",
       "PackagePath": "staticwebassets\\uploads\\070920250531_Bebetp.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250402_Alberto.jpg",
+      "PackagePath": "staticwebassets\\uploads\\080920250402_Alberto.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250406_ScreenSound.mp4",
+      "PackagePath": "staticwebassets\\uploads\\080920250406_ScreenSound.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250434_video organo.mp4",
+      "PackagePath": "staticwebassets\\uploads\\080920250434_video organo.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250435_Video organo.mp4",
+      "PackagePath": "staticwebassets\\uploads\\080920250435_Video organo.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250500_Beatles.avif",
+      "PackagePath": "staticwebassets\\uploads\\080920250500_Beatles.avif"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250516_projetos desenvolvidos .jpg",
+      "PackagePath": "staticwebassets\\uploads\\080920250516_projetos desenvolvidos .jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250522_exalta.jpeg",
+      "PackagePath": "staticwebassets\\uploads\\080920250522_exalta.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250541_Thiaguinho.jpg",
+      "PackagePath": "staticwebassets\\uploads\\080920250541_Thiaguinho.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250553_justin bieber.jpg",
+      "PackagePath": "staticwebassets\\uploads\\080920250553_justin bieber.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250954_Drake.jpg",
+      "PackagePath": "staticwebassets\\uploads\\080920250954_Drake.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.media-api.props",

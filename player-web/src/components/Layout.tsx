@@ -1,6 +1,4 @@
-// src/components/Layout.tsx
-import { Layout as AntLayout, Menu, Typography } from "antd";
-import { Link } from 'react-router-dom';
+import { Layout as AntLayout, Typography } from "antd";
 
 const { Header, Content } = AntLayout;
 const { Title } = Typography;
