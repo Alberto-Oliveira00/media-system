@@ -1,79 +1,61 @@
-import { Button, Grid, Spin } from "antd";
 import { useEffect, useState } from "react";
+import { Button, Spin, Row, Col } from "antd";
 import type { Playlist } from "../types/playlist";
-import { updatePlaylist } from "../api/playlistService";
 import { usePlaylistStore } from "../stores/usePlaylistStore";
-import PlaylistTable from "../components/PlaylistTable";
+import PlaylistCard from "../components/PlaylistCard"; // Novo componente
 import PlaylistForm from "../components/PlaylistForm";
-import PlaylistMedias from "../components/PlaylistMedias";
-
-const { useBreakpoint } = Grid;
+import PlaylistMedias from "../components/PlaylistMedias"; // Usaremos em outro local
 
 export default function Playlists() {
     const { playlists, loading, fetchPlaylists, addPlaylist, updatePlaylist, deletePlaylist } = usePlaylistStore();
-    const [ open, setOpen] = useState(false);
-    const [openMedias, setOpenMedias] = useState(false);
+    const [open, setOpen] = useState(false);
     const [editing, setEditing] = useState<Playlist | null>(null);
 
     useEffect(() => {
         fetchPlaylists();
     }, [fetchPlaylists]);
 
-    const handleCreateOrUpdate = async (fd: FormData, editingId?: number) => {
-        let sucess = false;
-        if (editingId){
-            sucess = await updatePlaylist(editingId, fd);
+    const handleCreateOrUpdate = async (data: any, editingId?: number) => {
+        let success = false;
+        if (editingId) {
+            success = await updatePlaylist(editingId, data);
         } else {
-            sucess = await addPlaylist(fd);
+            success = await addPlaylist(data);
         }
 
-        if(sucess) {
-            fetchPlaylists();
+        if (success) {
+            fetchPlaylists(); // Recarrega a lista após sucesso
             setOpen(false);
-            setEditing(null)
+            setEditing(null);
         }
     };
 
-    const handleDelete = async (id: number) => {
-        const ok = await deletePlaylist(id);
-        if(ok) {
-            fetchPlaylists();
-        }
-    };
-
-    if(loading) return <Spin />;
+    if (loading) return <Spin />;
 
     return (
         <div>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16}}>
+            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
                 <h2>Playlists</h2>
                 <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>
                     Adicionar playlist
                 </Button>
             </div>
 
-            <PlaylistTable 
-                data={playlists} 
-                onEdit={(p) => { setEditing(p); setOpen(true); }}
-                onDelete={handleDelete}
-                onOpenMedias={(p) => { setEditing(p); setOpenMedias(true); }}
-            />
-            
+            <Row gutter={[16, 16]}>
+                {playlists.map(p => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={p.id}>
+                        <PlaylistCard playlist={p} />
+                    </Col>
+                ))}
+            </Row>
+
             <PlaylistForm
                 open={open}
                 editing={editing}
                 onClose={() => { setOpen(false); setEditing(null); }}
                 onSubmit={handleCreateOrUpdate}
             />
-
-            <PlaylistMedias
-                open={openMedias}
-                playlist={editing}
-                onClose={() => {
-                    setOpenMedias(false);
-                    setEditing(null);
-                }}
-            />
+            {/* O componente PlaylistMedias não é mais um modal, será uma página */}
         </div>
     );
 }

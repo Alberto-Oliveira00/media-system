@@ -6,11 +6,12 @@ public interface IPlaylistService
 {
     Task<PlaylistResponseDTO> CreatePlaylistAsync(PlaylistRequestDTO playlistDTO);
     Task<IEnumerable<PlaylistResponseDTO>> GetAllPlaylistAsync();
-    Task<IEnumerable<PlaylistResponseDTO>> GetPlaylistIsActiveAsync();
     Task<PlaylistResponseDTO> GetPlaylistByIdAsync(int id);
     Task<IEnumerable<MediaResponseDTO>> GetMediasByPlaylistIdAsync(int playlistId);
     Task UpdatePlaylistAsync(int id, PlaylistRequestDTO playlistDto);
     Task DeletePlaylistAsync(int id);
+    Task<PlaylistResponseDTO> GetPlaylistIsActiveAsync();
+    Task ActivePlaylistAsync(int id);
     Task AddMediaToPlaylistAsync(int playlistId, int mediaId);
     Task DeleteMediaFromPlaylistAsync(int playlistId, int mediaId);
 }

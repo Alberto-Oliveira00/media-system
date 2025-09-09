@@ -10,8 +10,10 @@ type State = {
     error?: string | null;
     fetchPlaylists: () => Promise<void>;
     addPlaylist: (data: any) => Promise<boolean>;
+    getPlaylistById: (id: number) => Promise<Playlist | null>;
     updatePlaylist: (id: number, data: any) => Promise<boolean>;
     deletePlaylist: (id: number) => Promise<boolean>;
+    setActiveForPlayer: (id: number) => Promise<boolean>;
     addMediaToPlaylist: (playlistId: number, mediaId: number) => Promise<boolean>;
     deleteMediaFromPlaylist: (playlistId: number, mediaId: number) => Promise<boolean>;
 }
@@ -32,6 +34,19 @@ export const usePlaylistStore = create<State>((set, get) =>({
             message.error("Erro ao carregar playlists");
         } finally {
             set({ loading: false })
+        }
+    },
+    getPlaylistById: async (id: number) => {
+        set({ loading: true });
+        try{
+            const playlist = await playlistService.getPlaylistById(id);
+            return playlist;
+        } catch (err) {
+            const error = err as AxiosError;
+            message.error(`Erro ao carregar playlist: ${error.message}`);
+            return null;
+        } finally {
+            set({ loading: false });
         }
     },
 
@@ -83,6 +98,24 @@ export const usePlaylistStore = create<State>((set, get) =>({
         } finally {
             set({ loading: false });
         }
+    },
+    
+    setActiveForPlayer: async (id: number) => {
+        set({ loading: true });
+        try {
+            await playlistService.activePlaylist(id);
+            await get().fetchPlaylists(); 
+            message.success("Playlist ativada com sucesso!");
+            return true;
+        } catch (err){
+            const error = err as AxiosError;
+            message.error(`Erro ao ativar playlist: ${error.message}`);
+            return false;
+        }finally {
+            set({ loading: false });
+        }
+
+    
     },
 
     addMediaToPlaylist: async (playlistId, mediaId) => {

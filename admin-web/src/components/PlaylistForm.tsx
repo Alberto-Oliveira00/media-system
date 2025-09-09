@@ -22,7 +22,7 @@ export default function PlaylistForm({ open, editing, onClose, onSubmit}: Props)
             form.setFieldsValue({
                 nome: editing.nome,
                 descricao: editing.descricao,
-                isActiveForPlayer: editing.isActivePlayer,
+                isActiveForPlayer: editing.isActiveForPlayer,
             });
         }
     }, [editing, form, open]);
@@ -49,9 +49,6 @@ export default function PlaylistForm({ open, editing, onClose, onSubmit}: Props)
             </Form.Item>
             <Form.Item name="descricao" label="Descrição">
                 <Input.TextArea rows={3} />
-            </Form.Item>
-            <Form.Item name="isActiveForPlayer" valuePropName="checked">
-                <Checkbox>Player Ativo</Checkbox>
             </Form.Item>
         </Form>
     );

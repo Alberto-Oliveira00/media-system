@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, message, Spin } from "antd";
-import MediaTable from "../components/MediaTable";
+import { Button, Col, Row, Spin } from "antd";
 import MediaForm from "../components/MediaForm";
 import { useMediaStore } from "../stores/useMediaStore";
 import type { Media } from "../types/media";
+import MediaCard from "../components/MediaCard";
 
 export default function Medias(){
     const { medias, loading, fetchMedias, addMedia, updateMedia, deleteMedia } = useMediaStore();
@@ -40,11 +40,18 @@ export default function Medias(){
                 <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>Adicionar midia</Button>
             </div>
 
-            <MediaTable 
-                data={medias} 
-                onEdit={(m) => { setEditing(m); setOpen(true); }}
-                onDelete={handleDelete} 
-            />
+            <Row gutter={[16, 16]}>
+                {medias.map(m => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={m.id}>
+                        <MediaCard 
+                            media={m} 
+                            onEdit={(media) => { setEditing(media); setOpen(true); }}
+                            onDelete={handleDelete}
+                        />
+                    </Col>
+                ))}
+            </Row>
+
 
             <MediaForm open={open} editing={editing} onClose={() => setOpen(false)} onSubmit={handleCreateOrUpdate} />
         </div>

@@ -22,14 +22,14 @@ public class PlaylistService : IPlaylistService
         return _mapper.Map<IEnumerable<PlaylistResponseDTO>>(playlists);
     }
 
-    public async Task<IEnumerable<PlaylistResponseDTO>> GetPlaylistIsActiveAsync()
+    public async Task<PlaylistResponseDTO> GetPlaylistIsActiveAsync()
     {
-        var playlistsActive = await _uof.PlaylistRepository.GetPlaylistsIsActiveAsync();
-        
-        if (playlistsActive == null)
+        var playlistActive = await _uof.PlaylistRepository.GetPlaylistIsActiveAsync();
+
+        if (playlistActive == null)
             return null;
 
-        return _mapper.Map<IEnumerable<PlaylistResponseDTO>>(playlistsActive);
+        return _mapper.Map<PlaylistResponseDTO>(playlistActive);
     }
 
     public async Task<PlaylistResponseDTO> GetPlaylistByIdAsync(int id)
@@ -104,4 +104,15 @@ public class PlaylistService : IPlaylistService
         await _uof.CommitAsync();
     }
 
+    public async Task ActivePlaylistAsync(int id)
+    {
+        var playlists = await _uof.PlaylistRepository.GetAllAsync();
+
+        foreach (var playlist in playlists)
+        {
+            playlist.IsActiveForPlayer = playlist.Id == id;
+        }
+
+        await _uof.CommitAsync();
+    }
 }

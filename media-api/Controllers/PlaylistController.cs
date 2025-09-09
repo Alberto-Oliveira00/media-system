@@ -71,26 +71,6 @@ public class PlaylistController : ControllerBase
         }
     }
 
-    [HttpGet("active")]
-    public async Task<ActionResult<IEnumerable<PlaylistResponseDTO>>> GetActivePlaylistsAsync()
-    {
-        try
-        {
-            var activePlaylists = await _service.GetPlaylistIsActiveAsync();
-
-            if (activePlaylists == null)
-            {
-                return NotFound("Nenhuma playlist ativa encontrada.");
-            }
-            
-            return Ok(activePlaylists);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
     [HttpPost]
     public async Task<ActionResult<PlaylistResponseDTO>> PostAsync(PlaylistRequestDTO playlistDto)
     {
@@ -145,6 +125,44 @@ public class PlaylistController : ControllerBase
         }
     }
 
+    [HttpGet("active")]
+    public async Task<ActionResult<PlaylistResponseDTO>> GetActivePlaylistsAsync()
+    {
+        try
+        {
+            var activePlaylist = await _service.GetPlaylistIsActiveAsync();
+
+            if (activePlaylist == null)
+            {
+                return NotFound("Nenhuma playlist ativa encontrada.");
+            }
+            
+            return Ok(activePlaylist);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpPut("{id:int}/active")]
+    public async Task<IActionResult> ActivePlaylistAsync(int id)
+    {
+        try
+        {
+            await _service.ActivePlaylistAsync(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     [HttpPost("{playlistId:int}/medias/{mediaId:int}")]
     public async Task<IActionResult> PostMediaToPlaylistAsync(int playlistId, int mediaId)
     {
@@ -163,7 +181,7 @@ public class PlaylistController : ControllerBase
         }
     }
 
-    [HttpDelete("{playlistId:int}/medias/{mediaId:int}")]
+    [HttpDelete("{playlistId:int}/media/{mediaId:int}")]
     public async Task<IActionResult> DeleteMediaToPlaylist(int playlistId, int mediaId)
     {
         try

@@ -5,14 +5,12 @@ import { message } from "antd";
 import type { AxiosError } from "axios";
 
 type State = {
-  playlists: Playlist[];
+  activePlaylist: Playlist | null;
   loading: boolean;
-  selectedPlaylistId?: number | null;
   currentIndex: number;
   playing: boolean;
   imageDuration: number;
-  loadActivePlaylists: () => Promise<void>;
-  selectPlaylist: (id: number) => void;
+  loadActivePlaylist: () => Promise<void>;
   setIndex: (i: number) => void;
   next: () => void;
   prev: () => void;
@@ -22,27 +20,21 @@ type State = {
 };
 
 export const usePlayerStore = create<State>((set, get) => ({
-  playlists: [],
+  activePlaylist: null,
   loading: false,
-  selectedPlaylistId: null,
   currentIndex: 0,
   playing: true,
   imageDuration: 5,
 
-  loadActivePlaylists: async () => {
+  loadActivePlaylist: async () => {
     set({ loading: true });
     try {
-      const list = await playerService.getActivePlaylists();
-      set({ playlists: list });
-
-      const sel = get().selectedPlaylistId;
-      if (!sel && list.length > 0) {
-        set({ selectedPlaylistId: list[0].id, currentIndex: 0 });
-      }
-
-      if (sel && !list.find((p) => p.id === sel)) {
-        set({ selectedPlaylistId: list.length ? list[0].id : null, currentIndex: 0 });
-      }
+      const activePlaylist = await playerService.getActivePlaylist();
+      set({
+        activePlaylist,
+        currentIndex: 0,
+        playing: activePlaylist!== null,
+      });
     } catch (err) {
       const error = err as AxiosError;
       message.error(`Erro ao carregar playlists ativas: ${error?.message ?? ""}`);
@@ -51,32 +43,32 @@ export const usePlayerStore = create<State>((set, get) => ({
     }
   },
 
-  selectPlaylist: (id) => {
-    set({ selectedPlaylistId: id, currentIndex: 0 });
+  setIndex: (i) => {
+    const { activePlaylist } = get();
+        if (!activePlaylist || !activePlaylist.medias.length) return;
+
+        // Garante que o índice esteja dentro dos limites
+        const newIndex = Math.max(0, Math.min(i, activePlaylist.medias.length - 1));
+        set({ currentIndex: newIndex });
   },
 
-  setIndex: (i) => set({ currentIndex: i }),
-
   next: () => {
-    const { playlists, selectedPlaylistId, currentIndex } = get();
-    const pl = playlists.find((p) => p.id === selectedPlaylistId);
-    if (!pl || !pl.medias || pl.medias.length === 0) 
+    const { activePlaylist, currentIndex } = get();
+    if(!activePlaylist || !activePlaylist.medias || activePlaylist.medias.length === 0)
       return;
-    const nextIndex = (currentIndex + 1) % pl.medias.length;
+    const nextIndex = (currentIndex + 1) % activePlaylist.medias.length;
     set({ currentIndex: nextIndex });
   },
 
   prev: () => {
-    const { playlists, selectedPlaylistId, currentIndex } = get();
-    const pl = playlists.find((p) => p.id === selectedPlaylistId);
-    if (!pl || !pl.medias || pl.medias.length === 0) 
+    const { activePlaylist, currentIndex } = get();
+    if(!activePlaylist || !activePlaylist.medias || activePlaylist.medias.length === 0)
       return;
-    const prevIndex = (currentIndex - 1 + pl.medias.length) % pl.medias.length;
+    const prevIndex = (currentIndex - 1 + activePlaylist.medias.length) % activePlaylist.medias.length;
     set({ currentIndex: prevIndex });
   },
 
   play: () => set({ playing: true }),
   pause: () => set({ playing: false }),
-
   setImageDuration: (s) => set({ imageDuration: s }),
 }));

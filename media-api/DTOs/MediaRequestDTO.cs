@@ -6,8 +6,9 @@ public class MediaRequestDTO
 {
     [Required(ErrorMessage = "O nome da mídia é obrigatório.")]
     public string Nome { get; set; } = string.Empty;
+
+    [Required(ErrorMessage = "A descrição da mídia é obrigatória.")]
     public string? Descricao { get; set; }
 
-    [Required(ErrorMessage = "O caminho do arquivo é obrigatório.")]
     public IFormFile File { get; set; }
 }

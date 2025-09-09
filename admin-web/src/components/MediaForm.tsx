@@ -79,10 +79,18 @@ export default function MediaForm({ open, editing, onClose, onSubmit }: Props) {
 
   const content = (
     <Form form={form} layout="vertical">
-      <Form.Item name="Nome" label="Nome" rules={[{ required: true, message: "Informe o nome" }]}>
+      <Form.Item 
+        name="Nome" 
+        label="Nome" 
+        rules={[{ required: true, message: "Informe o nome" }]}
+      >
         <Input />
       </Form.Item>
-      <Form.Item name="Descricao" label="Descrição">
+      <Form.Item 
+        name="Descricao" 
+        label="Descrição" 
+        rules={[{ required: true, message: "Informe a descrição" }]}
+      >
         <Input.TextArea rows={3} />
       </Form.Item>
       

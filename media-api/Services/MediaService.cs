@@ -17,9 +17,24 @@ public class MediaService : IMediaService
         _env = env;
         _uof = uof;
     }
+
+    private bool isFileValid(IFormFile file)
+    {
+        var validFiles = new[]
+        {
+            "image/jpeg", "image/png", "image/gif", "image/webp",
+            "video/mp4", "video/webm", "video/ogg"
+        };
+
+        return validFiles.Contains(file.ContentType);
+    }
     public async Task<MediaResponseDTO> CreateMediaAsync(MediaRequestDTO mediaDto)
     {
+        if(mediaDto.File == null || !isFileValid(mediaDto.File))
+            throw new ArgumentException("Formato de arquivo inválido Apenas imagens e vídeos são permitidos.");
+
         var uploadsPath = Path.Combine(_env.WebRootPath, "uploads");
+
         if (!Directory.Exists(uploadsPath))
             Directory.CreateDirectory(uploadsPath);
 
@@ -63,10 +78,17 @@ public class MediaService : IMediaService
         if (media is null)
             throw new KeyNotFoundException("Mídia não encontrada.");
 
-        _mapper.Map(mediaDto, media);
+        if (!string.IsNullOrEmpty(mediaDto.Nome))
+            media.Nome = mediaDto.Nome;
 
-        if(mediaDto.File != null && mediaDto.File.Length > 0)
+        if (!string.IsNullOrEmpty(mediaDto.Descricao))
+            media.Descricao = mediaDto.Descricao;
+
+        if (mediaDto.File != null && mediaDto.File.Length > 0)
         {
+            if(!isFileValid(mediaDto.File))
+                throw new ArgumentException("Formato de arquivo inválido Apenas imagens e vídeos são permitidos.");
+
             var antigoFile = Path.Combine(_env.WebRootPath, media.FilePath.TrimStart('/'));
             if (File.Exists(antigoFile))
                 File.Delete(antigoFile);
@@ -78,7 +100,7 @@ public class MediaService : IMediaService
             var fileName = DateTime.Now.ToString("ddMMyyyyhhss") + "_" + mediaDto.Nome + Path.GetExtension(mediaDto.File.FileName);
             var newFilePath = Path.Combine(uploadPath, fileName);
 
-            using(var stream = new FileStream(newFilePath, FileMode.Create))
+            using (var stream = new FileStream(newFilePath, FileMode.Create))
             {
                 await mediaDto.File.CopyToAsync(stream);
             }
@@ -87,8 +109,8 @@ public class MediaService : IMediaService
         }
 
         await _uof.MediaRepository.UpdateAsync(media);
-
         await _uof.CommitAsync();
+
         return _mapper.Map<MediaResponseDTO>(media);
     }
 

@@ -1,32 +1,43 @@
-import { Card, Empty, Spin } from "antd";
+import { useEffect } from "react";
 import { usePlayerStore } from "../stores/usePlayerStore";
 import PlayerView from "../components/PlayerView";
-import { useParams } from "react-router-dom";
+import { Spin, Empty, Typography } from "antd";
+
+const { Title } = Typography;
 
 export default function PlayerPage() {
-  const { id } = useParams<{ id: string }>();
-  const { playlists, selectedPlaylistId, loading } = usePlayerStore();
-  
+    const { activePlaylist, loading, loadActivePlaylist } = usePlayerStore();
 
-  const fullPlaylist = playlists.find((p) => p.id === selectedPlaylistId) || null;
+    useEffect(() => {
+        loadActivePlaylist();
+        
+    }, [loadActivePlaylist]);
 
-  if (loading) return <Spin size="large" style={{ display: "block", margin: "40px auto" }} />;
+    if (loading && !activePlaylist) {
+        return <Spin size="large" style={{ display: 'block', margin: '50px auto' }} />;
+    }
 
-  if (!fullPlaylist) return <Card>Selecione uma playlist</Card>;
-
-  if (fullPlaylist.medias.length === 0) {
+    if (!activePlaylist) {
         return (
-            <div>
-                <h2 style={{ paddingBottom: 16 }}>{fullPlaylist.nome}</h2>
-                <Empty description="Esta playlist não possui mídias." />
-            </div>
+            <Empty
+                description={
+                    <Title level={4}>Nenhuma playlist ativa encontrada.</Title>
+                }
+                style={{ padding: '100px 0' }}
+            />
         );
     }
-    
-  return (
-    <div>
-      <h2 style={{paddingBottom: 16}}>{fullPlaylist.nome}</h2>
-      <PlayerView playlist={fullPlaylist} />
-    </div>
-  );
+
+    if (!activePlaylist.medias || activePlaylist.medias.length === 0) {
+        return (
+            <Empty
+                description={
+                    <Title level={4}>A playlist ativa não possui mídias.</Title>
+                }
+                style={{ padding: '100px 0' }}
+            />
+        );
+    }
+
+    return <PlayerView playlist={activePlaylist} />;
 }

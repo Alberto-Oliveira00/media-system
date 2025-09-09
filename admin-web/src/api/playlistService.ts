@@ -25,6 +25,11 @@ export const deletePlaylist = async (id: number) => {
     await api.delete(`playlist/${id}`);
 }
 
+export const activePlaylist = async (id: number) => {
+    await api.put(`/playlist/${id}/active`);
+};
+
+
 export const addMediaToPlaylist = async (playlistId: number, mediaId: number) => {
     await api.post(`/playlist/${playlistId}/medias/${mediaId}`);
 }

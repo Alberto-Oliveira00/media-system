@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Medias from './pages/Medias';
 import Playlists from './pages/Playlists';
 import PageHeader from './components/PageHeader';
+import PlaylistDetails from './pages/PlaylistDetailsPage';
   
   const { Content } = Layout;
 
@@ -29,6 +30,7 @@ import PageHeader from './components/PageHeader';
             <Routes>
               <Route path="/medias" element={<Medias />} />
               <Route path="/playlist" element={<Playlists />} />
+              <Route path="/playlist/:id" element={<PlaylistDetails />} />
               <Route path="/" element={<Navigate to="/medias" replace />} />
             </Routes>
           </div>

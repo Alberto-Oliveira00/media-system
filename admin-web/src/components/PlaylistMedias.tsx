@@ -1,4 +1,4 @@
-import { Button, Drawer, Grid, Modal, Popconfirm, Spin, Table } from "antd";
+import { Button, Popconfirm, Spin, Table, Typography } from "antd";
 import type { Playlist } from "../types/playlist";
 import { useMediaStore } from "../stores/useMediaStore";
 import { usePlaylistStore } from "../stores/usePlaylistStore";
@@ -6,62 +6,47 @@ import { useEffect, useState } from "react";
 import type { Media } from "../types/media";
 import { DeleteOutlined, FileAddOutlined } from "@ant-design/icons";
 
-const { useBreakpoint } = Grid;
+const { Title } = Typography;
 
 type Props = {
-    open: boolean;
-    playlist: Playlist | null;
-    onClose: () => void;
+    playlist: Playlist;
 };
 
-export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
-    const screens = useBreakpoint();
+export default function PlaylistMedias({ playlist }: Props) {
     const { medias, loading, fetchMedias } = useMediaStore();
-    const { addMediaToPlaylist, deleteMediaFromPlaylist } = usePlaylistStore();
+    const { addMediaToPlaylist, deleteMediaFromPlaylist, fetchPlaylists } = usePlaylistStore();
     const [loadingAction, setLoadingAction] = useState(false);
 
-    useEffect (() => {
-        if(open) {
-            fetchMedias();
-        }
-    }, [open, fetchMedias]);
+    useEffect(() => {
+        fetchMedias();
+    }, [fetchMedias]);
 
     const handleAdd = async (mediaId: number) => {
-        if(!playlist) 
-            return;
         setLoadingAction(true);
-        const sucess = await addMediaToPlaylist(playlist.id, mediaId);
-        if (sucess) {
-            const updated = usePlaylistStore.getState().playlists.find(p => p.id === playlist.id);
-            if (updated) {
-            Object.assign(playlist, updated);
-            }
-        }
+        const success = await addMediaToPlaylist(playlist.id, mediaId);
         setLoadingAction(false);
+        if (success) {
+            fetchPlaylists();
+        }
     };
 
     const handleRemove = async (mediaId: number) => {
-        if(!playlist)
-            return;
         setLoadingAction(true);
-        const sucess = await deleteMediaFromPlaylist(playlist.id, mediaId);
-        if(sucess) {
-            const update = usePlaylistStore.getState().playlists.find(p => p.id === playlist.id);
-            if(update) {
-                Object.assign(playlist, update);
-            }
-        }
+        const success = await deleteMediaFromPlaylist(playlist.id, mediaId);
         setLoadingAction(false);
+        if (success) {
+            fetchPlaylists();
+        }
     };
 
     const isMediaInPlaylist = (mediaId: number) => {
-        return playlist?.medias?.some(m => m.id === mediaId) ?? false;
-    }
+        return playlist.medias?.some(m => m.id === mediaId) ?? false;
+    };
 
     const columns = [
         { title: "Nome", dataIndex: "nome", key: "nome" },
-        { 
-            title: "Ações", 
+        {
+            title: "Ações",
             key: "acoes",
             render: (_: any, r: Media) => (
                 isMediaInPlaylist(r.id) ? (
@@ -70,9 +55,8 @@ export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
                             danger
                             icon={<DeleteOutlined />}
                             loading={loadingAction}
-                            shape={screens.md ? undefined : "circle"}
                         >
-                            {screens.md && "Remover"}
+                            Remover
                         </Button>
                     </Popconfirm>
                 ) : (
@@ -81,27 +65,26 @@ export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
                         type="primary"
                         onClick={() => handleAdd(r.id)}
                         loading={loadingAction}
-                        shape={screens.md ? undefined : "circle"}
                     >
-                        {screens.md && "Adicionar"}
+                        Adicionar
                     </Button>
                 )
             )
         }
     ];
 
-    const content = (
-        <div style={{ padding: 16 }}>
-            <h3>Mídias na Playlist</h3>
+    return (
+        <div>
+            <Title level={3}>Mídias na Playlist</Title>
             <Table
-                dataSource={playlist?.medias}
+                dataSource={playlist.medias}
                 columns={[{ title: "Nome", dataIndex: "nome", key: "nome" }]}
                 rowKey="id"
                 pagination={false}
                 style={{ marginBottom: 24 }}
             />
-            
-            <h3>Todas as Mídias</h3>
+
+            <Title level={3}>Todas as Mídias Disponíveis</Title>
             {loading ? <Spin /> : (
                 <Table
                     dataSource={medias}
@@ -111,31 +94,5 @@ export default function PlaylistMedias ({ open, playlist, onClose }: Props) {
                 />
             )}
         </div>
-    );
-
-    if (!screens.md) {
-        return (
-            <Drawer
-                title={`Gerenciar mídias de: ${playlist?.nome ?? ""}`}
-                open={open}
-                onClose={onClose}
-                width="100%"
-                footer={null}
-            >
-                {content}
-            </Drawer>
-        );
-    }
-    
-    return (
-        <Modal
-            title={`Gerenciar mídias de: ${playlist?.nome ?? ""}`}
-            open={open}
-            onCancel={onClose}
-            width={800}
-            footer={null}
-        >
-            {content}
-        </Modal>
     );
 }

@@ -94,13 +94,13 @@ export default function PlayerView({ playlist }: Props) {
             <Space align="center" style={{ width: "100%", justifyContent: "space-between" }}>
               <Space>
                 <Tooltip title="Anterior">
-                  <Button icon={<LeftOutlined />} onClick={() => { prev(); setIndex(Math.max(0, currentIndex - 1)); }} />
+                  <Button icon={<LeftOutlined />} onClick={prev} />
                 </Tooltip>
 
                 <Button type="primary" shape="circle" icon={playing ? <PauseOutlined /> : <PlayCircleOutlined />} onClick={togglePlay} />
 
                 <Tooltip title="Próxima">
-                  <Button icon={<RightOutlined />} onClick={() => { next(); setIndex((currentIndex + 1)); }} />
+                  <Button icon={<RightOutlined />} onClick={next} />
                 </Tooltip>
               </Space>
 

@@ -1,5 +1,5 @@
-import { Layout, Typography, Menu, Grid, Drawer, Button } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Layout, Typography, Grid, Drawer, Button, Menu } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
@@ -10,48 +10,52 @@ const { useBreakpoint } = Grid;
 export default function PageHeader() {
   const screens = useBreakpoint();
   const location = useLocation();
+  const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const links = [
-    { path: "/medias", label: "Mídias" },
-    { path: "/playlist", label: "Playlists" },
+  const menuItems = [
+    { key: "/medias", label: "Mídias" },
+    { key: "/playlist", label: "Playlists" },
   ];
+
+  const handleMenuClick = ({ key }: { key: string }) => {
+    navigate(key);
+    setDrawerOpen(false); // Fecha o drawer após a navegação
+  };
 
   return (
     <Header
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        background: '#001529',
       }}
     >
       <Title level={3} style={{ color: "white", margin: 0 }}>
         Gerenciamento de Mídias
       </Title>
 
-      {/* Menu Desktop */}
       {screens.md ? (
-        <nav style={{ display: "flex", gap: "24px" }}>
-          {links.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              style={{
-                color: "white",
-                textDecoration: "none",
-                fontWeight: location.pathname.startsWith(link.path)
-                  ? "bold"
-                  : "normal",
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          selectedKeys={[location.pathname]}
+          items={menuItems}
+          onClick={handleMenuClick}
+          style={{ 
+            flex: 1, 
+            minWidth: 0, 
+            justifyContent: 'flex-end',
+            background: 'transparent',
+            border: 'none',
+          }}
+        />
       ) : (
         <>
-          {/* Menu Mobile */}
-          <MenuOutlined
+          <Button
+            type="text"
+            icon={<MenuOutlined />}
             onClick={() => setDrawerOpen(true)}
             style={{ fontSize: 20, color: "white" }}
           />
@@ -61,25 +65,12 @@ export default function PageHeader() {
             onClose={() => setDrawerOpen(false)}
             open={drawerOpen}
           >
-            <nav style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              {links.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setDrawerOpen(false)}
-                  style={{
-                    color: location.pathname.startsWith(link.path)
-                      ? "#1677ff"
-                      : "inherit",
-                    fontWeight: location.pathname.startsWith(link.path)
-                      ? "bold"
-                      : "normal",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
+            <Menu
+              mode="inline"
+              selectedKeys={[location.pathname]}
+              items={menuItems}
+              onClick={handleMenuClick}
+            />
           </Drawer>
         </>
       )}
