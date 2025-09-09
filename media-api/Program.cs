@@ -1,5 +1,6 @@
 using media_api.Data;
 using media_api.DTOs.Mappings;
+using media_api.Middlewares;
 using media_api.Repositories;
 using media_api.Services;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,8 @@ builder.Services.AddAutoMapper(cfg =>
 });
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

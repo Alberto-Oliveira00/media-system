@@ -18,184 +18,85 @@ public class PlaylistController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PlaylistResponseDTO>>> GetAllAsync()
     {
-        try
-        {
-            var playlists = await _service.GetAllPlaylistAsync();
-            if (playlists is null)
-                return NoContent();
-            return Ok(playlists);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var playlists = await _service.GetAllPlaylistAsync();
+        if (playlists is null)
+            return NoContent();
+        return Ok(playlists);
     }
 
     [HttpGet("{id:int}", Name = "GetPlaylistById")]
     public async Task<ActionResult<PlaylistResponseDTO>> GetPlaylistById(int id)
     {
-        try
-        {
-            var playlist = await _service.GetPlaylistByIdAsync(id);
-            return Ok(playlist);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, "Ocorreu um erro ao buscar a mídia.");
-        }
+        var playlist = await _service.GetPlaylistByIdAsync(id);
+        return Ok(playlist);
     }
 
     [HttpGet("{id:int}/medias")]
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetMediasByPlaylistIdAsync(int id)
     {
-        try
-        {
-            var medias = await _service.GetMediasByPlaylistIdAsync(id);
-            if (medias == null || !medias.Any())
-            {
-                return NoContent();
-            }
-            return Ok(medias);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var medias = await _service.GetMediasByPlaylistIdAsync(id);
+        if (medias == null || !medias.Any())
+            return NoContent();
+
+        return Ok(medias);
     }
 
     [HttpPost]
     public async Task<ActionResult<PlaylistResponseDTO>> PostAsync(PlaylistRequestDTO playlistDto)
     {
-        try
-        {
-            var createPlaylist = await _service.CreatePlaylistAsync(playlistDto);
-            return CreatedAtRoute("GetPlaylistById", new { id = createPlaylist.Id }, createPlaylist);
-        }
-        catch (ArgumentException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var createPlaylist = await _service.CreatePlaylistAsync(playlistDto);
+        return CreatedAtRoute("GetPlaylistById", new { id = createPlaylist.Id },createPlaylist);
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] PlaylistRequestDTO playlistDto)
     {
-        try
-        {
-            await _service.UpdatePlaylistAsync(id, playlistDto);
-            return NoContent();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        await _service.UpdatePlaylistAsync(id, playlistDto);
+        return NoContent();
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
-        try
-        {
-            await _service.DeletePlaylistAsync(id);
-            return NoContent();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        await _service.DeletePlaylistAsync(id);
+
+        return NoContent();
     }
 
     [HttpGet("active")]
     public async Task<ActionResult<PlaylistResponseDTO>> GetActivePlaylistsAsync()
     {
-        try
-        {
-            var activePlaylist = await _service.GetPlaylistIsActiveAsync();
 
-            if (activePlaylist == null)
-            {
-                return NotFound("Nenhuma playlist ativa encontrada.");
-            }
-            
-            return Ok(activePlaylist);
-        }
-        catch (Exception ex)
+        var activePlaylist = await _service.GetPlaylistIsActiveAsync();
+
+        if (activePlaylist == null)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            return NotFound("Nenhuma playlist ativa encontrada.");
         }
+            
+        return Ok(activePlaylist);
+        
     }
 
     [HttpPut("{id:int}/active")]
     public async Task<IActionResult> ActivePlaylistAsync(int id)
     {
-        try
-        {
-            await _service.ActivePlaylistAsync(id);
-            return NoContent();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        await _service.ActivePlaylistAsync(id);
+        return NoContent();
+        
     }
 
     [HttpPost("{playlistId:int}/medias/{mediaId:int}")]
     public async Task<IActionResult> PostMediaToPlaylistAsync(int playlistId, int mediaId)
     {
-        try
-        {
-            await _service.AddMediaToPlaylistAsync(playlistId, mediaId);
-            return Ok();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        await _service.AddMediaToPlaylistAsync(playlistId, mediaId);
+        return Ok();
     }
 
     [HttpDelete("{playlistId:int}/media/{mediaId:int}")]
     public async Task<IActionResult> DeleteMediaToPlaylist(int playlistId, int mediaId)
     {
-        try
-        {
-            await _service.DeleteMediaFromPlaylistAsync(playlistId, mediaId);
-            return NoContent();
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        await _service.DeleteMediaFromPlaylistAsync(playlistId, mediaId);
+        return NoContent();
     }
 }
