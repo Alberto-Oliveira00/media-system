@@ -20,7 +20,7 @@ export default function PageHeader() {
 
   const handleMenuClick = ({ key }: { key: string }) => {
     navigate(key);
-    setDrawerOpen(false); // Fecha o drawer após a navegação
+    setDrawerOpen(false);
   };
 
   return (

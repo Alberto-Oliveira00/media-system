@@ -1,188 +1,24 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250932_6.docx",
-      "PackagePath": "staticwebassets\\uploads\\020920250932_6.docx"
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250902_teste.jpg",
+      "PackagePath": "staticwebassets\\uploads\\090920250902_teste.jpg"
     },
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250953_Drake.jpg",
-      "PackagePath": "staticwebassets\\uploads\\020920250953_Drake.jpg"
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250920_Uninove imagem.png",
+      "PackagePath": "staticwebassets\\uploads\\090920250920_Uninove imagem.png"
     },
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\020920250959_Organo.mp4",
-      "PackagePath": "staticwebassets\\uploads\\020920250959_Organo.mp4"
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250925_Uninove imagem.png",
+      "PackagePath": "staticwebassets\\uploads\\090920250925_Uninove imagem.png"
     },
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920250152_fffffffffffff.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920250152_fffffffffffff.jpg"
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250954_Imagem da uninove.png",
+      "PackagePath": "staticwebassets\\uploads\\090920250954_Imagem da uninove.png"
     },
     {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920250155_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920250155_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251000_Alberto.pdf",
-      "PackagePath": "staticwebassets\\uploads\\030920251000_Alberto.pdf"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251016_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251016_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251018_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251018_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251027_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251027_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251040_test.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251040_test.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251052_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251052_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251124_re.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251124_re.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251124_teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251124_teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251130_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251130_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251209_string.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251209_string.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251211_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251211_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251218_teste.jpeg",
-      "PackagePath": "staticwebassets\\uploads\\030920251218_teste.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251224_string.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251224_string.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251232_teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251232_teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\030920251257_string.jpg",
-      "PackagePath": "staticwebassets\\uploads\\030920251257_string.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\050920250759_12.jpg",
-      "PackagePath": "staticwebassets\\uploads\\050920250759_12.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250222_Teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\070920250222_Teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250257_Novo teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\070920250257_Novo teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250315_ Media Teste.png",
-      "PackagePath": "staticwebassets\\uploads\\070920250315_ Media Teste.png"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250330_ahvsahf.png",
-      "PackagePath": "staticwebassets\\uploads\\070920250330_ahvsahf.png"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250421_teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\070920250421_teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\070920250531_Bebetp.jpg",
-      "PackagePath": "staticwebassets\\uploads\\070920250531_Bebetp.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250402_Alberto.jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250402_Alberto.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250406_ScreenSound.mp4",
-      "PackagePath": "staticwebassets\\uploads\\080920250406_ScreenSound.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250434_video organo.mp4",
-      "PackagePath": "staticwebassets\\uploads\\080920250434_video organo.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250435_Video organo.mp4",
-      "PackagePath": "staticwebassets\\uploads\\080920250435_Video organo.mp4"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250500_Beatles.avif",
-      "PackagePath": "staticwebassets\\uploads\\080920250500_Beatles.avif"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250516_projetos desenvolvidos .jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250516_projetos desenvolvidos .jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250522_exalta.jpeg",
-      "PackagePath": "staticwebassets\\uploads\\080920250522_exalta.jpeg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250541_Thiaguinho.jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250541_Thiaguinho.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250553_justin bieber.jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250553_justin bieber.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250707_Mídia Teste.png",
-      "PackagePath": "staticwebassets\\uploads\\080920250707_Mídia Teste.png"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250813_Graziella.png",
-      "PackagePath": "staticwebassets\\uploads\\080920250813_Graziella.png"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250813_Lorem.jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250813_Lorem.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\080920250954_Drake.jpg",
-      "PackagePath": "staticwebassets\\uploads\\080920250954_Drake.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250504_Alberto Francisco de Oliveira.jpg",
-      "PackagePath": "staticwebassets\\uploads\\090920250504_Alberto Francisco de Oliveira.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250508_justin .jpg",
-      "PackagePath": "staticwebassets\\uploads\\090920250508_justin .jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250514_Teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\090920250514_Teste.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250516_asasas.docx",
-      "PackagePath": "staticwebassets\\uploads\\090920250516_asasas.docx"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250521_justin be.jpg",
-      "PackagePath": "staticwebassets\\uploads\\090920250521_justin be.jpg"
-    },
-    {
-      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250651_teste.jpg",
-      "PackagePath": "staticwebassets\\uploads\\090920250651_teste.jpg"
+      "Id": "C:\\Users\\Grazi\\bebeto\\media-system\\media-api\\wwwroot\\uploads\\090920250958_imagem drake.jpg",
+      "PackagePath": "staticwebassets\\uploads\\090920250958_imagem drake.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.media-api.props",

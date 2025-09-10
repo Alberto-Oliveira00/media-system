@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Row, Spin } from "antd";
+import { Button, Col, Empty, Row, Spin } from "antd";
 import MediaForm from "../components/MediaForm";
 import { useMediaStore } from "../stores/useMediaStore";
 import type { Media } from "../types/media";
@@ -32,6 +32,19 @@ export default function Medias(){
     };
 
     if (loading) return <Spin />
+
+    if (medias.length === 0) {
+        return (
+            <div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+                    <h2>Mídias</h2>
+                    <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>Adicionar mídia</Button>
+                </div>
+                <Empty description="Nenhuma mídia encontrada." style={{ marginTop: 50 }} />
+                <MediaForm open={open} editing={editing} onClose={() => setOpen(false)} onSubmit={handleCreateOrUpdate} />
+            </div>
+        );
+    }
 
     return(
         <div>

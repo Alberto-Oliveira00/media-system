@@ -76,7 +76,6 @@ export default function MediaForm({ open, editing, onClose, onSubmit }: Props) {
     },
   };  
   
-
   const content = (
     <Form form={form} layout="vertical">
       <Form.Item 

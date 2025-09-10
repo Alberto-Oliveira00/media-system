@@ -20,10 +20,6 @@ public class MediaController : ControllerBase
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetAsync()
     {
         var medias = await _service.GetAllMediasAsync();
-
-        if (medias == null)
-            return NoContent();
-
         return Ok(medias);
     }
 
@@ -38,7 +34,6 @@ public class MediaController : ControllerBase
     public async Task<ActionResult<MediaResponseDTO>> PostAsync([FromForm] MediaRequestDTO mediaRequestDTO)
     {
         var createMedia = await _service.CreateMediaAsync(mediaRequestDTO);
-
         return CreatedAtRoute("GetMediaById", new { id = createMedia.Id }, createMedia);
         
     }
@@ -47,9 +42,6 @@ public class MediaController : ControllerBase
     public async Task<IActionResult> PutAsync(int id, [FromForm] MediaRequestDTO mediaRequestDTO)
     {
         var mediaUpdate = await _service.UpdateMediaAsync(id, mediaRequestDTO);
-        if (mediaUpdate is null) 
-            return NotFound();
-
         return Ok(mediaUpdate);        
     }
 

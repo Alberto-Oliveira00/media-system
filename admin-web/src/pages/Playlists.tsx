@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, Spin, Row, Col } from "antd";
+import { Button, Spin, Row, Col, Empty } from "antd";
 import type { Playlist } from "../types/playlist";
 import { usePlaylistStore } from "../stores/usePlaylistStore";
-import PlaylistCard from "../components/PlaylistCard"; // Novo componente
+import PlaylistCard from "../components/PlaylistCard";
 import PlaylistForm from "../components/PlaylistForm";
-import PlaylistMedias from "../components/PlaylistMedias"; // Usaremos em outro local
 
 export default function Playlists() {
-    const { playlists, loading, fetchPlaylists, addPlaylist, updatePlaylist, deletePlaylist } = usePlaylistStore();
+    const { playlists, loading, fetchPlaylists, addPlaylist, updatePlaylist } = usePlaylistStore();
     const [open, setOpen] = useState(false);
     const [editing, setEditing] = useState<Playlist | null>(null);
 
@@ -24,13 +23,28 @@ export default function Playlists() {
         }
 
         if (success) {
-            fetchPlaylists(); // Recarrega a lista após sucesso
+            fetchPlaylists();
             setOpen(false);
             setEditing(null);
         }
     };
 
     if (loading) return <Spin />;
+
+    if (playlists.length === 0) {
+        return (
+            <div>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+                    <h2>Playlists</h2>
+                    <Button type="primary" onClick={() => { setEditing(null); setOpen(true); }}>
+                        Adicionar playlist
+                    </Button>
+                </div>
+                <Empty description="Nenhuma playlist encontrada." style={{ marginTop: 50 }} />
+                <PlaylistForm open={open} editing={editing} onClose={() => { setOpen(false); setEditing(null); }} onSubmit={handleCreateOrUpdate} />
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -55,7 +69,6 @@ export default function Playlists() {
                 onClose={() => { setOpen(false); setEditing(null); }}
                 onSubmit={handleCreateOrUpdate}
             />
-            {/* O componente PlaylistMedias não é mais um modal, será uma página */}
         </div>
     );
 }

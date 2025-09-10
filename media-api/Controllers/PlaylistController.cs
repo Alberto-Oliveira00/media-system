@@ -19,8 +19,6 @@ public class PlaylistController : ControllerBase
     public async Task<ActionResult<IEnumerable<PlaylistResponseDTO>>> GetAllAsync()
     {
         var playlists = await _service.GetAllPlaylistAsync();
-        if (playlists is null)
-            return NoContent();
         return Ok(playlists);
     }
 
@@ -35,9 +33,6 @@ public class PlaylistController : ControllerBase
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetMediasByPlaylistIdAsync(int id)
     {
         var medias = await _service.GetMediasByPlaylistIdAsync(id);
-        if (medias == null || !medias.Any())
-            return NoContent();
-
         return Ok(medias);
     }
 
@@ -66,24 +61,15 @@ public class PlaylistController : ControllerBase
     [HttpGet("active")]
     public async Task<ActionResult<PlaylistResponseDTO>> GetActivePlaylistsAsync()
     {
-
-        var activePlaylist = await _service.GetPlaylistIsActiveAsync();
-
-        if (activePlaylist == null)
-        {
-            return NotFound("Nenhuma playlist ativa encontrada.");
-        }
-            
+        var activePlaylist = await _service.GetPlaylistIsActiveAsync();            
         return Ok(activePlaylist);
-        
     }
 
     [HttpPut("{id:int}/active")]
     public async Task<IActionResult> ActivePlaylistAsync(int id)
     {
         await _service.ActivePlaylistAsync(id);
-        return NoContent();
-        
+        return NoContent();        
     }
 
     [HttpPost("{playlistId:int}/medias/{mediaId:int}")]

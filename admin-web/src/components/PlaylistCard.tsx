@@ -12,17 +12,15 @@ type Props = {
 
 export default function PlaylistCard({ playlist }: Props) {
    const navigate = useNavigate();
-    // Use um seletor para otimizar, lendo apenas a ação que o componente precisa.
    const setActiveForPlayer = usePlaylistStore((state) => state.setActiveForPlayer);
     
-    // A propriedade isActiveForPlayer já está na sua API.
     const isActive = playlist.isActiveForPlayer;
     
    const handleCardClick = () => {
      navigate(`/playlist/${playlist.id}`);
     };
 
-    const handleActiveClick = async (e: React.MouseEvent) => {
+    const handleActiveClick = async (e: React.MouseEvent) => {
         e.stopPropagation(); 
         try {
             if (isActive) {
@@ -35,31 +33,31 @@ export default function PlaylistCard({ playlist }: Props) {
             message.error("Erro ao ativar a playlist.");
             console.error(error);
         }
-    };
+    };
 
-    return (
-        <Card
-            hoverable
-            onClick={handleCardClick}
-            style={{ marginBottom: 16 }}
-        >
-            <Title level={4} style={{ margin: 0 }}>
-                {playlist.nome}
-            </Title>
-            <Text type="secondary" style={{ display: 'block', marginBottom: 8 }}>
-                Criada em: {new Date(playlist.createdAt).toLocaleString()}
-            </Text>
-            <p>{playlist.descricao}</p>
-            <Space style={{ justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-                <Text strong>{playlist.medias.length} mídias</Text>
-                <Button 
-                    type={isActive ? "primary" : "default"}
-                    onClick={handleActiveClick}
-                    icon={<PlayCircleOutlined />}
-                >
-                    {isActive ? "Ativa" : "Ativar"}
-                </Button>
-            </Space>
-        </Card>
-    );
+  return (
+      <Card
+        hoverable
+        onClick={handleCardClick}
+        style={{ marginBottom: 16 }}
+      >
+        <Title level={4} style={{ margin: 0 }}>
+          {playlist.nome}
+        </Title>
+          <Text type="secondary" style={{ display: 'block', marginBottom: 8 }}>
+            Criada em: {new Date(playlist.createdAt).toLocaleString()}
+          </Text>
+            <p>{playlist.descricao}</p>
+            <Space style={{ justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
+              <Text strong>{playlist.medias.length} mídias</Text>
+              <Button 
+                type={isActive ? "primary" : "default"}
+                onClick={handleActiveClick}
+                icon={<PlayCircleOutlined />}
+              >
+                {isActive ? "Ativa" : "Ativar"}
+              </Button>
+            </Space>
+      </Card>
+  );
 }

@@ -47,7 +47,6 @@ export const usePlayerStore = create<State>((set, get) => ({
     const { activePlaylist } = get();
         if (!activePlaylist || !activePlaylist.medias.length) return;
 
-        // Garante que o índice esteja dentro dos limites
         const newIndex = Math.max(0, Math.min(i, activePlaylist.medias.length - 1));
         set({ currentIndex: newIndex });
   },

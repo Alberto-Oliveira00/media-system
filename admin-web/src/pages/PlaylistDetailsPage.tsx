@@ -42,8 +42,8 @@ export default function PlaylistDetails() {
         );
     }
     
-    return (
-        <div>
+    return (
+        <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
                 <Button onClick={() => navigate('/playlist')}>Voltar</Button>
                 <Popconfirm title="Tem certeza que deseja excluir esta playlist?" onConfirm={handleDelete}>
@@ -53,6 +53,6 @@ export default function PlaylistDetails() {
             <Title level={2}>{playlist.nome}</Title>
             <p style={{ marginBottom: 12}}>{playlist.descricao}</p>
             <PlaylistMedias playlist={playlist} />
-        </div>
-    );
+        </div>
+    );
 }
