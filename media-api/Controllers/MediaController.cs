@@ -1,5 +1,6 @@
 ﻿using media_api.DTOs;
 using media_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ public class MediaController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetAsync()
     {
         var medias = await _service.GetAllMediasAsync();
