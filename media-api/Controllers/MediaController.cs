@@ -8,6 +8,7 @@ namespace media_api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class MediaController : ControllerBase
 {
     private readonly IMediaService _service;
@@ -18,7 +19,6 @@ public class MediaController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
     public async Task<ActionResult<IEnumerable<MediaResponseDTO>>> GetAsync()
     {
         var medias = await _service.GetAllMediasAsync();

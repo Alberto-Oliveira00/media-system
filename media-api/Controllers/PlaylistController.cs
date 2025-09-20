@@ -1,11 +1,14 @@
 using media_api.DTOs;
 using media_api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace media_api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
+
 public class PlaylistController : ControllerBase
 {
     IPlaylistService _service;
