@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace media_api.Controllers;
 
-[Route("[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {

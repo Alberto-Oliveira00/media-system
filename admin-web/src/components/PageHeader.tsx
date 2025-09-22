@@ -15,7 +15,7 @@ export default function PageHeader() {
 
   const menuItems = [
     { key: "/medias", label: "Mídias" },
-    { key: "/playlist", label: "Playlists" },
+    { key: "/playlists", label: "Playlists" },
   ];
 
   const handleMenuClick = ({ key }: { key: string }) => {

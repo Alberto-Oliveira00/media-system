@@ -4,6 +4,9 @@ import Medias from './pages/Medias';
 import Playlists from './pages/Playlists';
 import PageHeader from './components/PageHeader';
 import PlaylistDetails from './pages/PlaylistDetailsPage';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
   
   const { Content } = Layout;
 
@@ -28,9 +31,34 @@ import PlaylistDetails from './pages/PlaylistDetailsPage';
             }}
           >
             <Routes>
-              <Route path="/medias" element={<Medias />} />
-              <Route path="/playlist" element={<Playlists />} />
-              <Route path="/playlist/:id" element={<PlaylistDetails />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+
+              <Route
+                path="/medias"
+                element={
+                  <PrivateRoute>
+                    <Medias />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/playlists"
+                element={
+                  <PrivateRoute>
+                    <Playlists />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/playlist/:id"
+                element={
+                  <PrivateRoute>
+                    <PlaylistDetails />
+                  </PrivateRoute>
+                }
+              />
+
               <Route path="/" element={<Navigate to="/medias" replace />} />
             </Routes>
           </div>

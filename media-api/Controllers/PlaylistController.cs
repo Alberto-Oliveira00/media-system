@@ -62,9 +62,10 @@ public class PlaylistController : ControllerBase
     }
 
     [HttpGet("active")]
+    [AllowAnonymous]
     public async Task<ActionResult<PlaylistResponseDTO>> GetActivePlaylistsAsync()
     {
-        var activePlaylist = await _service.GetPlaylistIsActiveAsync();            
+        var activePlaylist = await _service.GetPlaylistIsActiveAsync();
         return Ok(activePlaylist);
     }
 
