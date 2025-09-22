@@ -61,12 +61,11 @@ As seguintes fases do desafio técnico foram integralmente concluídas:
 * **Fase 1 - CRUD de Mídias:** A API REST para gerenciar mídias e o painel de administração web para criar, listar, editar e excluir mídias. A interface utiliza cards responsivos.
 * **Fase 2 - Playlists e Relacionamentos:** O sistema de gerenciamento de playlists permite a criação e organização de playlists, a adição/remoção de mídias a elas, e a definição de qual playlist está ativa para exibição no player. A interface utiliza cards responsivos e uma tela dedicada para gerenciamento de mídias por playlist.
 * **Fase 3 - Player Web:** O player web foi implementado como um projeto separado, responsável apenas por reproduzir imagens e vídeos da playlist ativa. Ele possui controles de navegação e exibe as informações da mídia atual. A interface foi otimizada para ser responsiva.
-
+* **Fase 4 - Auth JWT:** Implementei autenticação JWT no back-end e configurei o front-end React para consumir esse fluxo de forma segura. Desenvolvi as telas de Login e Registro, garantindo que apenas usuários autenticados consigam acessar as demais rotas da aplicação. Além disso, configurei a criação automática de um usuário administrador padrão ao iniciar a aplicação, facilitando os testes e a administração inicial do sistema.
 
 ## O que Eu Faria com Mais Tempo
 
-Com mais tempo disponível, as seguintes melhorias seriam implementadas para elevar a qualidade e robustez da aplicação:
+Com mais tempo disponível, as seguintes melhorias seriam implementadas:
 
-* **Autenticação e Autorização:** Implementaria um sistema de autenticação via **JWT (JSON Web Tokens)** para proteger os endpoints da API, garantindo que apenas usuários autorizados possam acessar o app de administração.
 * **Testes Automatizados:** Adicionaria testes unitários e de integração para a API .NET.
 * **Arquitetura e Refatoração:** Refatoraria a camada de serviço e repositório para utilizar uma abordagem mais genérica e reutilizável, o que diminuiria a duplicação de código e tornaria o projeto mais escalável.
