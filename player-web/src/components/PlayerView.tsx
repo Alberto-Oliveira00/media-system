@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Row, Col, Space, Progress, Typography, Tooltip, Empty } from "antd";
-import { PlayCircleOutlined, PauseOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { PlayCircleOutlined, PauseOutlined, LeftOutlined, RightOutlined, ExpandOutlined } from "@ant-design/icons";
 import type { Playlist } from "../types/playlist";
 import { usePlayerStore } from "../stores/usePlayerStore";
 
@@ -17,6 +17,7 @@ export default function PlayerView({ playlist }: Props) {
   const media = playlist.medias[currentIndex];
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const imageTimerRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -70,13 +71,38 @@ export default function PlayerView({ playlist }: Props) {
     else play();
   };
 
+  const handleFullScreen = () => {
+    const element = videoRef.current || containerRef.current;
+    if (!element) return;
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    } else {
+      element.requestFullscreen?.().catch(() => {});
+    }
+  };
+
   return (
     <div>
       <Row gutter={[16, 16]}>
         <Col xs={24} md={16}>
-          <div style={{ background: "#000", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 320 }}>
+          <div
+            ref={containerRef}
+            style={{
+              background: "#000",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 320,
+              position: "relative"
+            }}
+          >
             {media.filePath?.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
-              <img src={getMediaUrl(media.filePath)} alt={media.nome} style={{ maxWidth: "100%", maxHeight: "70vh", objectFit: "contain" }} />
+              <img
+                src={getMediaUrl(media.filePath)}
+                alt={media.nome}
+                style={{ maxWidth: "100%", maxHeight: "70vh", objectFit: "contain" }}
+              />
             ) : (
               <video
                 ref={videoRef}
@@ -101,6 +127,9 @@ export default function PlayerView({ playlist }: Props) {
 
                 <Tooltip title="Próxima">
                   <Button icon={<RightOutlined />} onClick={next} />
+                </Tooltip>
+                <Tooltip title="Tela cheia">
+                  <Button icon={<ExpandOutlined />} onClick={handleFullScreen} />
                 </Tooltip>
               </Space>
 
